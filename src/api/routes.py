@@ -31,12 +31,12 @@ def handle_hello():
 def login():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    name = request.json.get("name", None)
-    lastname = request.json.get("lastname", None)
-    age = request.json.get("age", None)
+    #name = request.json.get("name", None)
+    #lastname = request.json.get("lastname", None)
+    #age = request.json.get("age", None)
 
 
-    user= User.query.filter_by(email=email, password=password, name=name, lastname=lastname, age=age ).first()
+    user= User.query.filter_by(email=email, password=password ).first()
 
     if user is None :
         return jsonify({"msg": "Bad username or password"}), 401

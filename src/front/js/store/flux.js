@@ -21,11 +21,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
-			getMessage: async () => {
+			login: async (email, password) => {
+				console.log(email,password);
+				
 				try{
 					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
-					const data = await resp.json()
+					const response = await fetch(process.env.BACKEND_URL + "/api/login", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json"
+						},
+					body: JSON.stringify({
+						email:email,
+						password:password
+					})
+				})
+
+				if (!response.ok){
+					throw new Error("Failed to login");
+				}
+					const data = await response.json()
+
+                localStorage.setItem("accessToken", data.acces_token)
+
+				console.log("User:", data);
+				
+
 					setStore({ message: data.message })
 					// don't forget to return something, that is how the async resolves
 					return data;
@@ -37,8 +58,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//get the store
 				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
+				
 				const demo = store.demo.map((elm, i) => {
 					if (i === index) elm.background = color;
 					return elm;
