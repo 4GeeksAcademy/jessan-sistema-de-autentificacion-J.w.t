@@ -1,3 +1,5 @@
+import { Home } from "../pages/home";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -20,6 +22,43 @@ const getState = ({ getStore, getActions, setStore }) => {
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
+
+			Home: async (email, password, name, lastname, age) => {
+				console.log(email,password, name, lastname,age);
+				
+				try{
+					// fetching data from the backend
+					const response = await fetch(process.env.BACKEND_URL + "api/signup", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json"
+						},
+					body: JSON.stringify({
+						email:email,
+						password:password,
+						name:name,
+						lastname:lastname,
+						age:age
+					})
+				})
+
+				if (!response.ok){
+					throw new Error("Failed to home");
+				}
+					const data = await response.json()
+
+                
+				console.log("User:", data);
+				
+
+					setStore({ message: data.message })
+					// don't forget to return something, that is how the async resolves
+					return data;
+				}catch(error){
+					console.log("Error loading message from backend", error)
+				}
+			},
+
 
 			login: async (email, password) => {
 				console.log(email,password);

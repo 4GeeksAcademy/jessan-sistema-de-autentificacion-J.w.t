@@ -8,10 +8,7 @@ export const Login = () => {
     const { store, actions } = useContext(Context);
     const [data, setData]=useState({
         "email": "",
-        "password":"",
-        //"name": "",
-        //"lastname":"",
-        //"age":""
+        "password":""
     })
 
     const handleChange = (e) => {
