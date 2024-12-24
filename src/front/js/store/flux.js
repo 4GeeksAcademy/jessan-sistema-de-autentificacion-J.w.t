@@ -81,7 +81,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 					const data = await response.json()
 
-                localStorage.setItem("accessToken", data.acces_token)
+                localStorage.setItem("accessToken", data.access_token)
 
 				console.log("User:", data);
 				
@@ -93,6 +93,40 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
+
+			protectedRoute: async () => {
+				let myToken= localStorage.getItem("accesToken")
+		
+				try{
+					// fetching data from the backend
+					const response = await fetch(process.env.BACKEND_URL + "api/perfil", {
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							"authorization": `Bearer ${myToken}`
+						}	
+				})
+
+				if (!response.ok){
+					const data = await response.json()
+					console.log(data);
+					
+					return data
+
+				}
+					
+					// don't forget to return something, that is how the async resolves
+					return data;
+				}catch(error){
+					console.log("Error loading message from backend", error)
+				}
+			},
+
+			logout:()=> {
+				localStorage.removeItem("accessToken")
+			},
+
+
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();

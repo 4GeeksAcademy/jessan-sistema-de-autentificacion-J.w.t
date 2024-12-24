@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
 
 export const Login = () => {
     const { store, actions } = useContext(Context);
+    const navigate= useNavigate()
     const [data, setData]=useState({
         "email": "",
         "password":""
@@ -18,9 +19,15 @@ export const Login = () => {
         }))
     }
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault()
-        actions.login(data.email, data.password)
+       const result= await actions.login(data.email, data.password)
+       if (result) {
+        navigate("/protected_route")
+       }
+       else{
+        alert ("error login")
+       }
     }
 
 

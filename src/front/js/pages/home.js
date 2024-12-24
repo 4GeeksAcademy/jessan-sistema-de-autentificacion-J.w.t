@@ -71,8 +71,11 @@ export const Home = () => {
 							onChange={handleChange} />
 					</div>
 				</div>
+				
 				<div className="row mb-3">
-					<label htmlFor="inputLastname3" className="col-sm-2 col-form-label">Lastname</label>
+					<label htmlFor="inputLastname3" className="col-sm-2 col-form-label">
+						Lastname
+					</label>
 					<div className="col-sm-10">
 						<input
 							type="text"
@@ -83,6 +86,7 @@ export const Home = () => {
 							onChange={handleChange} />
 					</div>
 				</div>
+				
 				<div className="row mb-3">
 					<label htmlFor="inputAge3" className="col-sm-2 col-form-label">
 						Age
