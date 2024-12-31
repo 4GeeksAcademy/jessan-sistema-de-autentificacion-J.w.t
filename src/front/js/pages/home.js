@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-import "../../styles/home.css";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -24,18 +23,66 @@ export const Home = () => {
 		actions.Home(data.email, data.password, data.name, data.lastname, data.age);
 	};
 
+	const containerStyle = {
+		maxWidth: "600px",
+		margin: "50px auto",
+		padding: "20px",
+		backgroundColor: "#f8f9fa",
+		borderRadius: "8px",
+		boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+		fontFamily: "'Arial', sans-serif"
+	};
+
+	const headingStyle = {
+		textAlign: "center",
+		marginBottom: "20px",
+		color: "#333"
+	};
+
+	const labelStyle = {
+		fontWeight: "bold",
+		color: "#555"
+	};
+
+	const inputStyle = {
+		border: "1px solid #ddd",
+		borderRadius: "5px",
+		padding: "10px",
+		fontSize: "16px",
+		width: "100%",
+		boxSizing: "border-box"
+	};
+
+	const buttonStyle = {
+		display: "block",
+		width: "100%",
+		padding: "10px",
+		fontSize: "18px",
+		fontWeight: "bold",
+		backgroundColor: "#007bff",
+		border: "none",
+		color: "white",
+		borderRadius: "5px",
+		cursor: "pointer",
+		transition: "background-color 0.3s ease"
+	};
+
+	const buttonHoverStyle = {
+		backgroundColor: "#0056b3"
+	};
+
 	return (
-		<div className="container">
-			<h2>Formulario de Registro</h2>
+		<div style={containerStyle}>
+			<h2 style={headingStyle}>Formulario de Registro</h2>
 			<form onSubmit={handleLogin}>
 				<div className="row mb-3">
-					<label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+					<label htmlFor="inputEmail3" style={labelStyle} className="col-sm-2 col-form-label">
 						Email
 					</label>
 					<div className="col-sm-10">
 						<input
 							type="email"
-							className="form-control"
+							style={inputStyle}
 							id="inputEmail3"
 							name="email"
 							value={data.email}
@@ -44,64 +91,73 @@ export const Home = () => {
 					</div>
 				</div>
 				<div className="row mb-3">
-					<label htmlFor="inputPassword3" className="col-sm-2 col-form-label">
+					<label htmlFor="inputPassword3" style={labelStyle} className="col-sm-2 col-form-label">
 						Password
 					</label>
 					<div className="col-sm-10">
 						<input
 							type="password"
-							className="form-control"
+							style={inputStyle}
 							id="inputPassword3"
 							name="password"
 							value={data.password}
-							onChange={handleChange} />
+							onChange={handleChange}
+						/>
 					</div>
 				</div>
 				<div className="row mb-3">
-					<label htmlFor="inputName3" className="col-sm-2 col-form-label">
+					<label htmlFor="inputName3" style={labelStyle} className="col-sm-2 col-form-label">
 						Name
 					</label>
 					<div className="col-sm-10">
 						<input
 							type="text"
-							className="form-control"
+							style={inputStyle}
 							id="inputName3"
 							name="name"
 							value={data.name}
-							onChange={handleChange} />
+							onChange={handleChange}
+						/>
 					</div>
 				</div>
-				
 				<div className="row mb-3">
-					<label htmlFor="inputLastname3" className="col-sm-2 col-form-label">
+					<label htmlFor="inputLastname3" style={labelStyle} className="col-sm-2 col-form-label">
 						Lastname
 					</label>
 					<div className="col-sm-10">
 						<input
 							type="text"
-							className="form-control"
+							style={inputStyle}
 							id="inputLastname3"
 							name="lastname"
 							value={data.lastname}
-							onChange={handleChange} />
+							onChange={handleChange}
+						/>
 					</div>
 				</div>
-				
 				<div className="row mb-3">
-					<label htmlFor="inputAge3" className="col-sm-2 col-form-label">
+					<label htmlFor="inputAge3" style={labelStyle} className="col-sm-2 col-form-label">
 						Age
 					</label>
 					<div className="col-sm-10">
 						<input
 							type="number"
-							className="form-control"
+							style={inputStyle}
 							id="inputAge3"
 							name="age"
 							value={data.age}
-							onChange={handleChange} />
+							onChange={handleChange}
+						/>
 					</div>
 				</div>
-				<button type="submit" className="btn btn-primary">Register</button>
+				<button
+					type="submit"
+					style={buttonStyle}
+					onMouseOver={(e) => (e.target.style.backgroundColor = buttonHoverStyle.backgroundColor)}
+					onMouseOut={(e) => (e.target.style.backgroundColor = buttonStyle.backgroundColor)}
+				>
+					Register
+				</button>
 			</form>
 		</div>
 	);

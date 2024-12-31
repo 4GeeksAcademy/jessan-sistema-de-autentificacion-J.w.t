@@ -4,6 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			message: null,
+			user: {},
 			demo: [
 				{
 					title: "FIRST",
@@ -95,28 +96,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			protectedRoute: async () => {
-				let myToken= localStorage.getItem("accesToken")
+				let myToken= localStorage.getItem("accessToken")
 		
 				try{
 					// fetching data from the backend
 					const response = await fetch(process.env.BACKEND_URL + "api/perfil", {
 						method: "GET",
 						headers: {
-							"Content-Type": "application/json",
-							"authorization": `Bearer ${myToken}`
+							"Authorization": `Bearer ${myToken}`
 						}	
 				})
 
-				if (!response.ok){
+				if (response.ok){
 					const data = await response.json()
 					console.log(data);
-					
+					setStore({user:data})
 					return data
 
 				}
 					
 					// don't forget to return something, that is how the async resolves
-					return data;
 				}catch(error){
 					console.log("Error loading message from backend", error)
 				}
